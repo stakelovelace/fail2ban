@@ -1,7 +1,7 @@
 name: Get latest Fail2https://github.com/redoracle/docker_fail2ban/blob/main/release-versions/fail2ban-latest.txtban release version
 on:
   schedule:
-    - cron:  '*/59 * * * *'
+    - cron:  '0 0 */12 * *'
 jobs:
   get-version:
     runs-on: ubuntu-latest
