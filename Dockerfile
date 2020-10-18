@@ -19,7 +19,10 @@ LABEL maintainer="Redoracle" \
   org.opencontainers.image.description="Fail2ban" \
   org.opencontainers.image.licenses="MIT"
 
-ENV FAIL2BAN_VERSION="0.11.1" \
+RUN wget https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/release-versions/fail2ban-latest.txt \
+  && F2BVERSION=$(cat ./release-versions/fail2ban-latest.txt) 
+
+ENV FAIL2BAN_VERSION="$F2BVERSION" \
   TZ="UTC"
 
 RUN apk --update --no-cache add \
