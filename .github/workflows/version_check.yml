@@ -1,4 +1,4 @@
-name: Get latest Fail2ban release version
+name: Get latest Fail2https://github.com/redoracle/docker_fail2ban/blob/main/release-versions/fail2ban-latest.txtban release version
 on:
   schedule:
     - cron:  '*/59 * * * *'
@@ -11,7 +11,7 @@ jobs:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
       - name: Fetch node release version
         run: |
-          curl -sL https://github.com/fail2ban/fail2ban/releases/latest | grep "tag" | head -1 | sed -n -e 's/^.*tag\///p' | cut -d "\"" -f 1 > release-versions/cardano-node-latest.txt
+          curl -sL https://github.com/fail2ban/fail2ban/releases/latest | grep "tag" | head -1 | sed -n -e 's/^.*tag\///p' | cut -d "\"" -f 1 > release-versions/fail2ban-latest.txt
       - name: Assigns release version
         run: |
           VERSION=$(cat ./release-versions/fail2ban-latest.txt)
