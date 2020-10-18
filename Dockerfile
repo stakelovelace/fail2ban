@@ -1,4 +1,4 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} alpine:3.12
+FROM --platform=${TARGETPLATFORM:-linux/amd64} debian:stable-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -19,39 +19,31 @@ LABEL maintainer="Redoracle" \
   org.opencontainers.image.description="Fail2ban" \
   org.opencontainers.image.licenses="MIT"
 
-RUN wget https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/release-versions/fail2ban-latest.txt \
-  && F2BVERSION=$(cat ./release-versions/fail2ban-latest.txt) 
-
-ENV FAIL2BAN_VERSION="$F2BVERSION" \
-  TZ="UTC"
-
-RUN apk --update --no-cache add \
-    curl \
+# Initialize Env
+RUN apt update \
+    && apt -y install curl \
     ipset \
     iptables \
-    ip6tables \
     kmod \
     nftables \
     python3 \
-    py3-setuptools \
-    ssmtp \
+    python-setuptools \
+    msmtp \
     tzdata \
     wget \
-    whois \
-  && apk --update --no-cache add -t build-dependencies \
-    build-base \
-    py3-pip \
+    unzip \
+    whois 
+
+RUN apt update; apt -y install bash python3 build-essential \
+    python3-pip \
     python3-dev \
   && pip3 install --upgrade pip \
   && pip3 install dnspython3 pyinotify \
-  && cd /tmp \
-  && curl -SsOL https://github.com/fail2ban/fail2ban/archive/${FAIL2BAN_VERSION}.zip \
-  && unzip ${FAIL2BAN_VERSION}.zip \
-  && cd fail2ban-${FAIL2BAN_VERSION} \
-  && 2to3 -w --no-diffs bin/* fail2ban \
-  && python3 setup.py install \
-  && apk del build-dependencies \
-  && rm -rf /etc/fail2ban/jail.d /var/cache/apk/* /tmp/*
+  && wget https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/build.sh \
+  && bash ./build.sh \
+  && apt remove -y build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev zlib1g-dev \
+  && apt -y purge && apt -y clean && apt -y autoremove \
+  && rm -rf /etc/fail2ban/jail.d /tmp/* /var/lib/apt/lists/* 
 
 COPY entrypoint.sh /entrypoint.sh
 
