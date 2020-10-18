@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd /tmp
-curl -sL -o fail2ban-latest.txt https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/release-versions/fail2ban-latest.txt \
+wget fail2ban-latest.txt https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/release-versions/fail2ban-latest.txt \
 F2BVERSION=$(cat ./fail2ban-latest.txt) 
 export FAIL2BAN_VERSION="$F2BVERSION" 
 export TZ="UTC" 
