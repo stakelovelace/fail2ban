@@ -1,7 +1,7 @@
 name: Get latest Fail2ban release version
 on:
   schedule:
-    - cron:  '0 0 */12 * *'
+    - cron:  '*/59 * * * *'
 jobs:
   get-version:
     runs-on: ubuntu-latest
