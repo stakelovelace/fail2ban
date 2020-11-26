@@ -1,4 +1,4 @@
-name: Docker Image CD Stage 1
+name: Docker Image Fail2ban
 
 on:
   push:
