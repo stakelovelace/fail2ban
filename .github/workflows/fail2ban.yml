@@ -1,0 +1,23 @@
+name: Docker Image CD Stage 1
+
+on:
+  push:
+    paths:
+      - 'release-versions/fail2ban-latest.txt'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: docker login
+      env:
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}   
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}  
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Compiling new node software
+      run: |      
+        docker build . --compress --tag stakelovelace/fail2ban
+    - name: docker push
+      run: |
+        docker push stakelovelace/fail2ban
