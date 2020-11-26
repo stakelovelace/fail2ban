@@ -41,11 +41,11 @@ RUN apt update; apt -y install bash python3 build-essential \
   && pip3 install dnspython3 pyinotify \
   && wget https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/build.sh \
   && bash ./build.sh \
-  && apt remove -y build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev zlib1g-dev \
+  && apt remove -y build-essential \
   && apt -y purge && apt -y clean && apt -y autoremove \
   && rm -rf /etc/fail2ban/jail.d /tmp/* /var/lib/apt/lists/* 
 
-COPY entrypoint.sh /entrypoint.sh
+ADD https://raw.githubusercontent.com/redoracle/docker_fail2ban/main/entrypoint.sh /
 
 RUN chmod a+x /entrypoint.sh
 

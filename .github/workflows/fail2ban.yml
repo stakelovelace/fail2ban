@@ -17,7 +17,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Compiling new node software
       run: |      
-        docker build . --compress --tag stakelovelace/fail2ban
+        docker build . --compress --tag redoracle/fail2ban
     - name: docker push
       run: |
-        docker push stakelovelace/fail2ban
+        docker push redoracle/fail2ban
