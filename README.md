@@ -1,11 +1,9 @@
-# docker_fail2ban
-fail2ban docker container
-
+<p align="center"><a href="https://hub.docker.com/r/redoracle/" target="_blank"><img src="https://github.com/stakelovelace/cardano-node/blob/master/docker_intro.png"></a></p>
 
 ## About
 
-[Fail2ban](https://www.fail2ban.org) Docker image based on Alpine Linux.<br />
-If you are interested, [check out](https://hub.docker.com/r/redoracle/) my other Docker images!
+💡 [Fail2ban](https://www.fail2ban.org) Docker image based on Alpine Linux.<br />
+If you are interested, 🔔 [check out](https://hub.docker.com/r/redoracle/) my other Docker images!
 
 ___
 
