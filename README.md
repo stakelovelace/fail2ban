@@ -3,7 +3,7 @@
 ## About
 
 💡 [Fail2ban](https://www.fail2ban.org) Docker image based on Alpine Linux.<br />
-If you are interested, 🔔 [check out](https://hub.docker.com/r/redoracle/) my other Docker images!
+If you are interested, 🔔 [check out](https://hub.docker.com/r/redoracle/) our other Docker images!
 
 ___
 
